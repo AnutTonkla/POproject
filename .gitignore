@@ -1,0 +1,4 @@
+node_modules/
+Javascript/*.map
+Javascript/*.d.ts
+.DS_Store

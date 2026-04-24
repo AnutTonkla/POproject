@@ -1,0 +1,77 @@
+/* 1. สร้างพื้นที่โปร่งใสไว้ที่ขอบบนสุด (สูงประมาณ 20px) */
+.navbar-trigger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /* ความหนาของพื้นที่ตรวจจับเมาส์ */
+    z-index: 999; /* ให้อยู่ใต้ Navbar นิดหน่อยแต่อยู่เหนือ Content */
+    background: transparent; /* โปร่งใส มองไม่เห็น */
+}
+
+/* 2. ตั้งค่า Navbar เริ่มต้น (ซ่อนไว้) */
+.navbar {
+    position: fixed;
+    top: -70px; /* ปรับให้มากกว่าความสูง Navbar เล็กน้อยเพื่อให้ซ่อนมิด */
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(17, 17, 15, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* เพิ่มความลื่นไหล */
+    z-index: 1000;
+}
+
+/* 3. สั่งให้ Navbar แสดงผลเมื่อ Hover ที่ Trigger หรือ ตัวมันเอง */
+/* ใช้เครื่องหมาย + เพื่อสั่ง element ที่อยู่ติดกัน */
+.navbar-trigger:hover + .navbar,
+.navbar:hover {
+    top: 0;
+}
+
+/* ลบจุด Bullet และจัดเรียงเมนูให้อยู่กลางแนวนอน */
+.nav-links {
+    list-style: none; /* ลบจุดดำหน้าเมนู */
+    display: flex;    /* จัดเรียงเป็นแนวนอน */
+    gap: 30px;        /* เว้นระยะห่างระหว่างเมนู */
+    margin: 0;        /* ลบ margin เริ่มต้น */
+    padding: 0;       /* ลบ padding เริ่มต้น */
+}
+
+/* ตั้งค่าตัวอักษร*/
+.nav-links a {
+    color: white;           
+    text-decoration: none;    /* ลบเส้นใต้ */
+    font-family: sans-serif;  /* ฟอนต์พื้นฐาน */
+    font-size: 16px;          /* ปรับขนาดตามความเหมาะสม */
+    transition: color 0.3s;   /* เอฟเฟกต์ตอนเปลี่ยนสี */
+}
+
+/* เพิ่มความสวยงามตอนเอาเมาส์ไปชี้ที่ตัวอักษร */
+.nav-links a:hover {
+    color: #f0a93f; /* เปลี่ยนเป็นสีเทาอ่อนๆ เมื่อชี้ */
+}
+
+/* */
+.down-arrow {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    animation: bounce 2s infinite; /* ทำให้ลูกศรขยับขึ้นลงเบาๆ */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+    40% {transform: translateY(5px) translateX(-50%);}
+    60% {transform: translateY(3px) translateX(-50%);}
+}
+
+/* ซ่อนลูกศรเมื่อ Navbar เลื่อนลงมาแล้ว */
+.navbar-trigger:hover .down-arrow {
+    display: none;
+}

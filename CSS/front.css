@@ -1,0 +1,27 @@
+/* จัดการหัวข้อหลัก (ชื่อของคุณ) */
+h1 {
+    color: #ffffff;            /* สีขาวบริสุทธิ์ */
+    font-size: 62px;           /* ขนาดตัวอักษร */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 10px; 
+    margin-top: 1px;       /* ระยะห่างจากบรรทัดล่าง */
+    letter-spacing: 7px;       /* ระยะห่างระหว่างตัวอักษร */
+}
+
+/* จัดการหัวข้อรอง (เช่น ประสบการณ์ทำงาน) */
+h2 {
+    color: #eeeeee;            /* สีฟ้า Cyan เพื่อให้ดูเด่นขึ้นบนพื้นหลังมืด */
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 30px;          /* ดันหัวข้อลงมาจากเนื้อหาด้านบน */
+    margin-bottom: 15px;
+    border-left: 4px solid #eba030; /* เพิ่มเส้นขีดข้างหน้าเพื่อให้ดูเป็นส่วนๆ */
+    padding-left: 15px;        /* ระยะห่างระหว่างเส้นกับตัวอักษร */
+}
+
+/* สไตล์เพิ่มเติมสำหรับตัวเน้น (em) ใต้ h1 */
+.content-box p em {
+    color: #cec9c9;            /* สีเทาอ่อน */
+    font-style: normal;        /* ยกเลิกตัวเอียงถ้าต้องการให้ดูโมเดิร์น */
+    font-size: 14px;
+}

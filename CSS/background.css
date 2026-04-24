@@ -1,0 +1,55 @@
+/* ส่วนตั้งค่า Global Variables */
+:root {
+    --bg-color: #1b1b1f;
+    --blob-blur: 150px;
+    --blob-opacity: 0.6;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ตั้งค่าพื้นฐานเบื้องต้น */
+body, html {
+    margin: 0;
+    padding: 0;
+    /* overflow-x: hidden สำคัญมาก เพื่อกันพวกเงาหรือ blur ทะลุออกนอกจอแล้วเกิด Scrollbar แนวนอน */
+    overflow-x: hidden;
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Layer ฉากหลังคงที่ */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* ใช้ 100% แทน 100vw เพื่อป้องกันปัญหา scrollbar บางเบราว์เซอร์ */
+    height: 100vh;
+    z-index: -1;
+}
+
+/* Wrapper สำหรับคุมระยะห่างจากขอบจอ */
+.content {
+    display: flex;
+    justify-content: center; 
+    padding: 40px 40px 0; /* บน | ซ้าย-ขวา | ล่าง */
+}
+
+/* กล่องเนื้อหาแบบ Glassmorphism */
+.content-box {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* เพื่อความปลอดภัยสำหรับเบราว์เซอร์ Safari */
+    border: 1px solid var(--glass-border);
+    border-radius: 24px 24px 0 0;
+    
+    width: 100%;
+    max-width: 1200px;
+    min-height: 100vh; /* บังคับให้สูงเต็มจอเสมอ แม้เนื้อหายังน้อย */
+    
+    padding: 3rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    
+    /* ใช้ Flexbox ช่วยจัดระเบียบเนื้อหาภายใน */
+    display: flex;
+    flex-direction: column;
+}

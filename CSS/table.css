@@ -1,0 +1,36 @@
+/* ตั้งค่าตาราง */
+.experience-table {
+    width: 100%;
+    max-width: 600px; /* กำหนดความกว้างสูงสุด */
+    border-collapse: collapse; /* ยุบเส้นขอบให้เป็นเส้นเดียว */
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* เพิ่มเงาให้ดูมีมิติ */
+}
+
+/* หัวตาราง (Black header) */
+.experience-table thead th {
+    background-color: #333;
+    color: white;
+    text-align: left;
+    padding: 12px 15px;
+    border: 1px solid #444;
+}
+
+/* ช่องข้อมูลในตาราง */
+.experience-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+/* สลับสีแถวเพื่อให้ดูง่าย (Zebra stripes) */
+.experience-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* เอฟเฟกต์เวลาเอาเมาส์ไปชี้แถว */
+.experience-table tbody tr:hover {
+    background-color: #e9e9e9;
+    transition: background-color 0.2s;
+}

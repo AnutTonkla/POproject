@@ -1,5 +1,6 @@
 import { GameEngine } from '../GameEngine.js';
 const engine = new GameEngine();
+//สั่งให้ engine เปลี่ยนสถานะผู้เล่น และสลับหน้าจอ
 window.chooseJob = (jobName) => {
     console.log("Selecting Hero:", jobName);
     engine.selectJob(jobName);
@@ -9,15 +10,16 @@ window.chooseJob = (jobName) => {
     if (classDisplay)
         classDisplay.innerText = `Hero: ${jobName}`;
     if (selectionScreen)
-        selectionScreen.style.display = 'none';
+        selectionScreen.style.display = 'none'; //สั่งให้หน้าเลือกตัวละครหายไปโดยใช้ display = 'none'
     if (gameScreen)
-        gameScreen.style.display = 'block';
+        gameScreen.style.display = 'block'; //สั่งให้game-screen ขึ้นมาโดยใช้ display = 'block'
 };
+//เมื่อส่งคำตอบจะดึงค่าจากช่อง Input แปลงเป็นตัวเลขแล้วส่งไปให้ GameEngine
 const handleAttack = () => {
     // ระบุว่าเป็น HTMLInputElement เพื่อให้เข้าถึงค่า .value ได้
-    const input = document.getElementById('answer-input');
+    const input = document.getElementById('answer-input'); //as HTMLInputElement:ย้ำกับระบบว่าตัวแปร input นี้คือช่องกรอกข้อมูลนะ เพื่อให้เราดึงค่า .value มาใช้ได้
     if (input && input.value !== "") {
-        engine.submitAnswer(parseInt(input.value));
+        engine.submitAnswer(parseInt(input.value)); //ดึงตัวหนังสือจากช่องพิมพ์มาแปลงเป็นตัวเลข
         input.value = '';
         input.focus();
     }

@@ -39,7 +39,7 @@ p {
     color: #eeeeee;            /* สีฟ้า Cyan เพื่อให้ดูเด่นขึ้นบนพื้นหลังมืด */
     font-size: 24px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 30px;          /* ดันหัวข้อลงมาจากเนื้อหาด้านบน */
+    margin-top: 1px;          /* ดันหัวข้อลงมาจากเนื้อหาด้านบน */
     margin-bottom: 15px;
     padding-left: 15px;        /* ระยะห่างระหว่างเส้นกับตัวอักษร */
 }

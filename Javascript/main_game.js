@@ -21,7 +21,6 @@ const handleAttack = () => {
     }
 };
 
-// ใช้แค่ชุดเดียวพอครับ
 const submitBtn = document.getElementById('submit-btn');
 if (submitBtn) {
     submitBtn.onclick = handleAttack; // ใช้ onclick แทนเพื่อความชัวร์

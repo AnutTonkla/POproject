@@ -6,10 +6,12 @@ import { Boss } from './Characters/Boss.js';
 export class GameEngine {
     player = null;
     boss = new Boss();
-    timer = null;
+    timer;
     currentEquation = null;
+    constructor() {
+        this.timer = new Timer('timer-display');
+    }
     selectJob(jobName) {
-        this.timer = this.timer || new Timer('timer-display');
         if (jobName === 'Knight')
             this.player = new Knight();
         else if (jobName === 'Archer')
@@ -22,20 +24,24 @@ export class GameEngine {
         if (!this.player)
             return;
         this.currentEquation = this.player.generateEquation();
-        this.timer?.start();
+        this.timer.start();
         this.updateUI();
     }
     submitAnswer(userAnswer) {
         if (!this.player || !this.currentEquation)
             return;
-        const timeTaken = this.timer?.stop() || 0;
-        const damage = this.player.checkAnswer(userAnswer, timeTaken);
+        const timeTaken = this.timer.stop();
+        const damage = this.player.checkAnswer({
+            userAnswer,
+            correctAnswer: this.currentEquation.answer,
+            timeTaken
+        });
         if (damage > 0) {
-            this.boss.takeDamage(damage); // ถ้าตอบถูก บอสโดนดาเมจ
+            this.boss.takeDamage(damage);
         }
         this.updateUI();
         if (!this.boss.isDead()) {
-            setTimeout(() => this.bossTurn(), 100); // ถ้าบอสไม่ตาย มันจะตีสวนใน 1 วินาที
+            setTimeout(() => this.bossTurn(), 500);
         }
         else {
             alert("Victory!");
@@ -45,23 +51,23 @@ export class GameEngine {
         if (!this.player)
             return;
         const damage = this.boss.calculateAttackDamage();
-        this.player.takeDamage(damage); // ผู้เล่นรับดาเมจจากบอส
+        this.player.takeDamage(damage);
         this.updateUI();
         if (this.player.hp > 0) {
-            this.startNewTurn(); // ถ้าเรายังไม่ตาย เริ่มข้อใหม่
+            this.startNewTurn();
         }
         else {
             alert("Game Over!");
         }
     }
     updateUI() {
-        const updateBar = (id, current, max) => {
-            const el = document.getElementById(id);
+        const updateBar = (HPbarid, currentHP, maxHPbar) => {
+            const el = document.getElementById(HPbarid);
             if (el)
-                el.style.width = `${(current / max) * 100}%`;
-            const txt = document.getElementById(id.replace('-fill', '-text'));
+                el.style.width = `${(currentHP / maxHPbar) * 100}%`;
+            const txt = document.getElementById(HPbarid.replace('-fill', '-text'));
             if (txt)
-                txt.innerText = `${current}/${max}`;
+                txt.innerText = `${currentHP}/${maxHPbar}`;
         };
         updateBar('boss-hp-fill', this.boss.hp, this.boss.maxHp);
         updateBar('player-hp-fill', this.player?.hp || 0, this.player?.maxHp || 1);

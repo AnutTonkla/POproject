@@ -6,16 +6,18 @@ export class Timer {
         this.elementId = elementId;
     }
     getTimeElapsed() {
-        return this.startTime === 0 ? 0 : (Date.now() - this.startTime) / 1000;
+        return this.startTime === 0
+            ? 0
+            : (Date.now() - this.startTime) / 1000;
     }
     start() {
-        this.stop(); // เคลียร์ของเก่าก่อนเริ่มใหม่
+        this.stop();
         this.startTime = Date.now();
         const displayElement = document.getElementById(this.elementId);
         this.intervalId = setInterval(() => {
             if (displayElement) {
-                // ใช้ฟังก์ชัน getTimeElapsed แทนการเขียนสูตรซ้ำ
-                displayElement.innerText = `Time: ${this.getTimeElapsed().toFixed(1)}s`;
+                displayElement.innerText =
+                    `Time: ${this.getTimeElapsed().toFixed(1)}s`;
             }
         }, 100);
     }

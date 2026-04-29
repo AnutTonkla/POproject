@@ -11,9 +11,10 @@ export class Boss {
         this.atk = atk;
     }
 
-    // สุ่มดาเมจดิบๆ จากค่า atk เลย ไม่ต้องคูณอะไรเพิ่ม
     calculateAttackDamage(): number {
-        return Math.floor(Math.random() * this.atk);
+        const variance = 0.2; // ±20%
+        const damage = this.atk * (1 - variance + Math.random() * variance * 2);
+        return Math.floor(damage);
     }
 
     takeDamage(amount: number) {

@@ -1,21 +1,27 @@
 export class Archer {
     name = "Archer";
-    hp = 100;
-    maxHp = 100;
+    hp = 150;
+    maxHp = 150;
     atk = 40;
     spd = 60;
-    currentAnswer = 0;
-    takeDamage(amount) { this.hp -= amount; }
+    takeDamage(amount) {
+        this.hp = Math.max(0, this.hp - amount);
+    }
     generateEquation() {
         const a = Math.floor(Math.random() * 50) + 1;
         const b = Math.floor(Math.random() * 50) + 1;
-        this.currentAnswer = a + b;
-        return { question: `${a} + ${b} = ?`, answer: this.currentAnswer };
+        return {
+            question: `${a} + ${b} = ?`,
+            answer: a + b
+        };
     }
-    checkAnswer(userAnswer, timeTaken) {
-        if (userAnswer !== this.currentAnswer)
+    checkAnswer(input) {
+        const { userAnswer, correctAnswer, timeTaken } = input;
+        if (userAnswer !== correctAnswer)
             return 0;
-        // ถ้าตอบภายใน 5 วินาที ดาเมจ x
-        return timeTaken <= 5 ? this.atk * 2 : this.atk;
+        // จุดเด่น Archer = เร็วแล้วแรง
+        return timeTaken <= 5
+            ? this.atk * 2 // ตอบไว = คริติคอล
+            : this.atk; // ช้า = ดาเมจปกติ
     }
 }

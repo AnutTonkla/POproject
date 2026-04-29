@@ -1,27 +1,36 @@
-import { ICharacter } from '../Interfaces.js';
+import { ICharacter, Equation, CheckAnswerInput } from '../Interfaces.js';
 
 export class Knight implements ICharacter {
     name = "Knight";
-    hp = 150; maxHp = 150; atk = 60; spd = 40;
-    private currentAnswer: number = 0;
+    hp = 200;
+    maxHp = 200;
+    atk = 60;
+    spd = 40;
 
     takeDamage(amount: number) {
-        this.hp -= amount;
+        this.hp = Math.max(0, this.hp - amount);
     }
-    generateEquation() {
+
+    generateEquation(): Equation {
         const a = Math.floor(Math.random() * 50);
         const b = Math.floor(Math.random() * 50);
+
         return {
             question: `${a} + ${b} = ?`,
             answer: a + b
         };
     }
-checkAnswer(userAnswer: number, timeTaken: number): number {
-        // เช็คว่า คำตอบที่ผู้เล่นส่งมา ตรงกับที่บันทึกไว้ใน currentAnswer หรือไม่
-        if (userAnswer === this.currentAnswer) {
-            return this.atk + 5; // ตอบถูก ได้ดาเมจ
-        } else {
-            return Math.floor(this.atk / 2); // ตอบผิด ดาเมจเป็น 0
+
+    checkAnswer(input: CheckAnswerInput): number {
+        const { userAnswer, correctAnswer, timeTaken } = input;
+
+        if (userAnswer === correctAnswer) {
+            // bonus ถ้าตอบเร็ว
+            const speedBonus = Math.max(0, 10 - timeTaken);
+            return Math.floor(this.atk + speedBonus);
         }
+
+        // ❗ ตอบผิด = 0 (ชัดเจน)
+        return 0;
     }
 }

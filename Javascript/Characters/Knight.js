@@ -1,12 +1,11 @@
 export class Knight {
     name = "Knight";
-    hp = 150;
-    maxHp = 150;
+    hp = 200;
+    maxHp = 200;
     atk = 60;
     spd = 40;
-    currentAnswer = 0;
     takeDamage(amount) {
-        this.hp -= amount;
+        this.hp = Math.max(0, this.hp - amount);
     }
     generateEquation() {
         const a = Math.floor(Math.random() * 50);
@@ -16,13 +15,14 @@ export class Knight {
             answer: a + b
         };
     }
-    checkAnswer(userAnswer, timeTaken) {
-        // เช็คว่า คำตอบที่ผู้เล่นส่งมา ตรงกับที่บันทึกไว้ใน currentAnswer หรือไม่
-        if (userAnswer === this.currentAnswer) {
-            return this.atk + 5; // ตอบถูก ได้ดาเมจ
+    checkAnswer(input) {
+        const { userAnswer, correctAnswer, timeTaken } = input;
+        if (userAnswer === correctAnswer) {
+            // bonus ถ้าตอบเร็ว
+            const speedBonus = Math.max(0, 10 - timeTaken);
+            return Math.floor(this.atk + speedBonus);
         }
-        else {
-            return Math.floor(this.atk / 2); // ตอบผิด ดาเมจเป็น 0
-        }
+        // ❗ ตอบผิด = 0 (ชัดเจน)
+        return 0;
     }
 }

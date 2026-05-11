@@ -1,0 +1,50 @@
+/* จัดการคอนเทนเนอร์หลักให้เรียงแนวนอน */
+.character-container {
+    display: flex;
+    justify-content: center; /* จัดให้อยู่กึ่งกลางหน้าจอ */
+    gap: 20px;               /* ระยะห่างระหว่างการ์ดตัวละคร */
+    flex-wrap: wrap;         /* รองรับหน้าจอเล็กลงโดยการขึ้นบรรทัดใหม่ */
+    padding: 20px;
+}
+
+/* ตั้งค่าการ์ดตัวละครแต่ละตัว */
+.character-card {
+    flex: 1;                 /* ให้ทุกการ์ดกว้างเท่ากัน */
+    max-width: 250px;        /* จำกัดความกว้างสูงสุด */
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.05); /* พื้นหลังจางๆ ให้ดูมีมิติ */
+    border-radius: 10px;
+    overflow: hidden;        /* ป้องกันรูปภาพล้นขอบการ์ด */
+    text-align: center;      /* จัดตัวอักษรให้อยู่กลางภาพ */
+    border: 1px solid rgba(235, 160, 48, 0.3); /* ขอบสีส้มเหลืองจางๆ */
+}
+
+/* จัดการรูปภาพตัวละคร */
+.char-img {
+    width: 100%;             /* ให้รูปกว้างเต็มพื้นที่การ์ด */
+    height: auto;
+    display: block;
+    transition: transform 0.3s; /* เอฟเฟกต์ตอนเอาเมาส์ชี้ */
+}
+
+.character-card:hover .char-img {
+    transform: scale(1.05);  /* ขยายรูปเล็กน้อยเวลา Hover */
+}
+
+/* จัดการส่วนข้อความใต้ภาพ */
+.character-card figcaption {
+    padding: 15px;
+    color: white;
+}
+
+.character-card h3 {
+    margin: 0 0 10px 0;
+    color: #77daee;          /* สีฟ้าตามสไตล์จอมเวท/เทคโนโลยี */
+}
+
+.character-card p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+    color: #ccc;             /* สีเทาอ่อนให้อ่านง่าย */
+}

@@ -1,0 +1,82 @@
+import { Knight } from './Characters/Knight.js';
+import { Archer } from './Characters/Archer.js';
+import { Mage } from './Characters/Mage.js';
+import { Timer } from './Timer.js';
+import { Boss } from './Characters/Boss.js';
+// กำหนดค่ารอนำไปใช้งาน
+export class GameEngine {
+    player = null;
+    boss = new Boss();
+    timer;
+    currentEquation = null;
+    constructor() {
+        this.timer = new Timer('timer-display');
+    }
+    // เลือกตัวละคร 
+    selectJob(jobName) {
+        if (jobName === 'Knight')
+            this.player = new Knight();
+        else if (jobName === 'Archer')
+            this.player = new Archer();
+        else
+            this.player = new Mage();
+        this.startNewTurn();
+    }
+    // เริ่มเทิร์นใหม่ เช็คว่าเลือกตัวละครรึยัง 
+    startNewTurn() {
+        if (!this.player)
+            return;
+        // 
+        this.currentEquation = this.player.generateEquation();
+        this.timer.start();
+        this.updateUI();
+    }
+    submitAnswer(userAnswer) {
+        if (!this.player || !this.currentEquation)
+            return;
+        const timeTaken = this.timer.stop();
+        const damage = this.player.checkAnswer({
+            userAnswer,
+            correctAnswer: this.currentEquation.answer,
+            timeTaken
+        });
+        if (damage > 0) {
+            this.boss.takeDamage(damage);
+        }
+        this.updateUI();
+        if (!this.boss.isDead()) {
+            setTimeout(() => this.bossTurn(), 500);
+        }
+        else {
+            alert("Victory!");
+        }
+    }
+    bossTurn() {
+        if (!this.player)
+            return;
+        const damage = this.boss.calculateAttackDamage();
+        this.player.takeDamage(damage);
+        this.updateUI();
+        if (this.player.hp > 0) {
+            this.startNewTurn();
+        }
+        else {
+            alert("Game Over!");
+        }
+    }
+    updateUI() {
+        const updateBar = (HPbarid, currentHP, maxHPbar) => {
+            const el = document.getElementById(HPbarid);
+            if (el)
+                el.style.width = `${(currentHP / maxHPbar) * 100}%`;
+            const txt = document.getElementById(HPbarid.replace('-fill', '-text'));
+            if (txt)
+                txt.innerText = `${currentHP}/${maxHPbar}`;
+        };
+        updateBar('boss-hp-fill', this.boss.hp, this.boss.maxHp);
+        updateBar('player-hp-fill', this.player?.hp || 0, this.player?.maxHp || 1);
+        const qEl = document.getElementById('display-question');
+        if (qEl)
+            qEl.innerText = this.currentEquation?.question || "";
+    }
+}

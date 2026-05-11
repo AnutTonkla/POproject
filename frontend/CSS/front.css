@@ -1,0 +1,88 @@
+h1 {
+    color: #ffffff;
+    font-size: 62px;
+    font-family: 'Segoe UI';
+    margin: 1px 0 10px 0; /* รวม margin เป็นบรรทัดเดียว (top, right, bottom, left) */
+    letter-spacing: 7px;
+}
+
+h2 {
+    color: #eeeeee;
+    font-size: 40px;
+    font-family: 'Segoe UI';
+    margin: 30px 0 15px 0;
+    
+    /* การตั้งค่าเส้นขีด */
+    border-left: 4px solid #eba030;
+    padding-left: 5px;   /* ใส่ไว้นิดเดียว 5px เพื่อไม่ให้เส้นทับตัวอักษรจนเกินไป */
+    
+    /* เทคนิคสำคัญ: บังคับให้ขนาดบล็อกเท่ากับตัวหนังสือ */
+    width: fit-content; 
+    display: block;      /* หรือใช้ inline-block ถ้าต้องการให้มีอย่างอื่นมาต่อข้างๆ */
+}
+
+h3 {
+    color: #eca828;
+    font-size: 28px;
+    font-family: 'Segoe UI';
+    margin: 30px 0 15px 0;
+    padding-left: 0;
+}
+
+h4 {
+    color: #fcfbfb;
+    font-size: 28px;
+    font-family: 'Segoe UI';
+    margin: 30px 0 15px 0;
+    padding-left: 0;
+}
+
+/* --- ข้อความเนื้อหาทั่วไป --- */
+p {
+    color: #eeeeee;
+    font-size: 18px;
+    font-family: 'Segoe UI';
+    margin: 1px 0 15px 0;
+    padding-left: 0;     /* รีเซ็ตเป็น 0 ตามความต้องการของคุณ */
+}
+
+em {
+    color: #979393;
+    font-size: 18px;
+    font-family: 'Segoe UI';
+    
+}
+
+/* คลาสเสริมสำหรับจัดกลาง */
+.text-center {
+    text-align: center !important;
+    border-left: none !important; /* มั่นใจว่าไม่มีขีดส้มติดมา */
+    padding-left: 0 !important;
+    width: 100% !important;        /* กระจายเต็มพื้นที่เพื่อให้กึ่งกลางทำงาน */
+}
+
+.text-left {
+    padding-left: 160px; 
+}
+
+.label-bold {
+    font-weight: bold;    /* ทำให้เป็นตัวหนา */
+    font-size: 1.2em;     /* ทำให้ใหญ่กว่าปกติ 20% (หรือใช้ px เช่น 28px) */
+    color: #f5f4f3;     
+    margin-right: 5px;    /* เพิ่มระยะห่างด้านขวานิดหน่อย */
+}
+
+/* จัดระเบียบ Wrapper ให้วางขนานกัน */
+.contact-flex-wrapper {
+    display: flex;
+    justify-content: space-around; /* จัดให้มีช่องว่างระหว่างสองฝั่งเท่าๆ กัน */
+    align-items: flex-start;       /* ให้ข้อมูลเริ่มจากด้านบนพร้อมกัน */
+    padding: 20px;
+    gap: 40px;                     /* ระยะห่างระหว่างฝั่งซ้ายและขวา */
+}
+
+/* ปรับแต่งฝั่งข้อมูลและที่อยู่ */
+.contact-info, .contact-address {
+    flex: 1;                       /* ให้ทั้งสองฝั่งกินพื้นที่เท่ากัน */
+    text-align: left;              /* จัดตัวอักษรชิดซ้าย */
+}

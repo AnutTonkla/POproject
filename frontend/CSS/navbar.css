@@ -1,67 +1,91 @@
-/* 1. สร้างพื้นที่โปร่งใสไว้ที่ขอบบนสุด  */
+/* =========================================
+   0. เพิ่มตัวแปรสำหรับ Navbar ใน :root
+   ========================================= */
+:root {
+    /* โหมดมืด */
+    --navbar-bg: rgba(17, 17, 15, 0.95);
+    --nav-text: #ffffff;
+    --nav-arrow: rgba(255, 255, 255, 0.5);
+}
+
+body.light-mode {
+    /* โหมดสว่าง */
+    --navbar-bg: #C8B6A6;
+    --nav-text: #ffffff;
+    --nav-arrow: rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   1. ส่วนพื้นที่ตรวจจับเมาส์
+   ========================================= */
 .navbar-trigger {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 40px; /* ความหนาของพื้นที่ตรวจจับเมาส์ */
-    z-index: 999; /* ให้อยู่ใต้ Navbar นิดหน่อยแต่อยู่เหนือ Content */
-    background: transparent; /* โปร่งใส มองไม่เห็น */
+    height: 40px;
+    z-index: 999;
+    background: transparent;
 }
 
-/* 2. ตั้งค่า Navbar ซ่อนไว้ */
+/* =========================================
+   2. ตั้งค่า Navbar (เปลี่ยนสีพื้นหลังตามธีม)
+   ========================================= */
 .navbar {
     position: fixed;
-    top: -70px; /* ปรับให้มากกว่าความสูง Navbar เล็กน้อยเพื่อให้ซ่อนมิด */
+    top: -70px;
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: rgba(17, 17, 15, 0.95);
+    background-color: var(--navbar-bg); /* ใช้ตัวแปรตามธีม */
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* เพิ่มความลื่นไหล */
+    transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
     z-index: 1000;
+    box-shadow: 0 2px 10px var(--card-shadow); /* เพิ่มเงาให้นิดหน่อยเวลาเลื่อนลงมา */
 }
 
-/* 3. สั่งให้ Navbar แสดงผลเมื่อ Hover ที่ Trigger หรือ ตัวมันเอง */
-/* ใช้เครื่องหมาย + เพื่อสั่ง element ที่อยู่ติดกัน */
 .navbar-trigger:hover + .navbar,
 .navbar:hover {
     top: 0;
 }
 
-/* ลบจุด Bullet และจัดเรียงเมนูให้อยู่กลางแนวนอน */
+/* =========================================
+   3. เมนูและการจัดการตัวอักษร
+   ========================================= */
 .nav-links {
-    list-style: none; /* ลบจุดดำหน้าเมนู */
-    display: flex;    /* จัดเรียงเป็นแนวนอน */
-    gap: 30px;        /* เว้นระยะห่างระหว่างเมนู */
-    margin: 0;        /* ลบ margin เริ่มต้น */
-    padding: 0;       /* ลบ padding เริ่มต้น */
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
 }
 
-/* ตั้งค่าตัวอักษร*/
 .nav-links a {
-    color: white;           
-    text-decoration: none;    /* ลบเส้นใต้ */
-    font-family: sans-serif;  /* ฟอนต์พื้นฐาน */
-    font-size: 16px;          /* ปรับขนาดตามความเหมาะสม */
-    transition: color 0.3s;   /* เอฟเฟกต์ตอนเปลี่ยนสี */
+    color: var(--nav-text);      /* ใช้ตัวแปรตามธีม */
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 16px;
+    transition: color 0.3s;
 }
 
-/* สีเอาเมาส์ไปชี้ที่ตัวอักษร */
 .nav-links a:hover {
-    color: #f0a93f; 
+    color: var(--accent);        /* ใช้สีส้ม/ทองเดิมที่เราตั้งไว้ */
 }
 
+/* =========================================
+   4. ลูกศรบ่งบอกตำแหน่ง (Down Arrow)
+   ========================================= */
 .down-arrow {
     position: absolute;
     top: 5px;
     left: 50%;
     transform: translateX(-50%);
-    color: rgba(255, 255, 255, 0.5);
-    font-size:17px;
-    animation: bounce 2s infinite; /* ทำให้ลูกศรขยับขึ้นลงเบาๆ */
+    color: var(--nav-arrow);     /* ใช้ตัวแปรตามธีม */
+    font-size: 17px;
+    animation: bounce 2s infinite;
+    pointer-events: none;        /* เพื่อให้เมาส์ทะลุไปโดน trigger ได้ */
 }
 
 @keyframes bounce {
@@ -70,7 +94,6 @@
     60% {transform: translateY(3px) translateX(-50%);}
 }
 
-/* ซ่อนลูกศรเมื่อ Navbar เลื่อนลงมาแล้ว */
 .navbar-trigger:hover .down-arrow {
     display: none;
 }

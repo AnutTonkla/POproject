@@ -1,50 +1,73 @@
-/* จัดการคอนเทนเนอร์หลักให้เรียงแนวนอน */
+:root {
+    /* โหมดมืด */
+    --char-card-bg: rgba(255, 255, 255, 0.05);
+    --char-card-border: rgba(29, 28, 27, 0.3);
+    --char-name: #ff9800;
+    --char-desc: #cccccc;
+}
+
+body.light-mode {
+    /* โหมดสว่าง */
+    --char-card-bg: #ffffff;
+    --char-card-border: rgba(100, 60, 28, 0.7);
+    --char-name: #574634; 
+    --char-desc: #1d1d1c;
+}
+
+/* คอนเทนเนอร์หลัก */
 .character-container {
     display: flex;
-    justify-content: center; /* จัดให้อยู่กึ่งกลางหน้าจอ */
-    gap: 20px;               /* ระยะห่างระหว่างการ์ดตัวละคร */
-    flex-wrap: wrap;         /* รองรับหน้าจอเล็กลงโดยการขึ้นบรรทัดใหม่ */
-    padding: 20px;
+    justify-content: center;
+    gap: 1px;
+    flex-wrap: wrap;
+    padding: 10px;
 }
 
-/* ตั้งค่าการ์ดตัวละครแต่ละตัว */
+/* การ์ดตัวละคร */
 .character-card {
-    flex: 1;                 /* ให้ทุกการ์ดกว้างเท่ากัน */
-    max-width: 250px;        /* จำกัดความกว้างสูงสุด */
-    margin: 0;
-    background-color: rgba(255, 255, 255, 0.05); /* พื้นหลังจางๆ ให้ดูมีมิติ */
+    flex: 1;
+    max-width: 250px;
+    background-color: var(--char-card-bg);
     border-radius: 10px;
-    overflow: hidden;        /* ป้องกันรูปภาพล้นขอบการ์ด */
-    text-align: center;      /* จัดตัวอักษรให้อยู่กลางภาพ */
-    border: 1px solid rgba(235, 160, 48, 0.3); /* ขอบสีส้มเหลืองจางๆ */
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid var(--char-card-border);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
 }
 
-/* จัดการรูปภาพตัวละคร */
+.character-card:hover {
+    transform: translateY(-5px);
+}
+
+/* รูปภาพตัวละคร (บังคับขนาดให้เท่ากัน) */
 .char-img {
-    width: 100%;             /* ให้รูปกว้างเต็มพื้นที่การ์ด */
-    height: auto;
+    width: 100%;
+    height: 350px; /* บังคับความสูงเพื่อให้การ์ดเท่ากัน */
+    object-fit: cover; /* ป้องกันรูปเบี้ยว */
     display: block;
-    transition: transform 0.3s; /* เอฟเฟกต์ตอนเอาเมาส์ชี้ */
+    transition: transform 0.3s;
 }
 
 .character-card:hover .char-img {
-    transform: scale(1.05);  /* ขยายรูปเล็กน้อยเวลา Hover */
+    transform: scale(1.05);
 }
 
-/* จัดการส่วนข้อความใต้ภาพ */
+/* ส่วนข้อความ */
 .character-card figcaption {
     padding: 15px;
-    color: white;
 }
 
-.character-card h3 {
+.character-card h4 {
     margin: 0 0 10px 0;
-    color: #77daee;          /* สีฟ้าตามสไตล์จอมเวท/เทคโนโลยี */
+    color: var(--char-name);
+    font-size: 22px;
 }
 
 .character-card p {
     font-size: 14px;
     line-height: 1.4;
     margin: 0;
-    color: #ccc;             /* สีเทาอ่อนให้อ่านง่าย */
+    color: var(--char-desc);
 }

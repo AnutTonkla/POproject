@@ -1,28 +1,43 @@
+:root {
+    /* โหมดมืด */
+    --text-main: #ffffff;
+    --text-secondary: #979393; /* สีสำหรับ em */
+    --accent: #ff9800;
+}
+
+body.light-mode {
+    /* โหมดสว่าง */
+    --text-main: #574634;
+    --text-secondary: #40513B; /* สีเทาเข้มขึ้นให้อ่านออกในโหมดสว่าง */
+    --accent: #40513B;
+}
+
 h1 {
-    color: #ffffff;
+    color: var(--text-main); /* ใช้ตัวแปรสีหลัก */
     font-size: 62px;
     font-family: 'Segoe UI';
-    margin: 1px 0 10px 0; /* รวม margin เป็นบรรทัดเดียว (top, right, bottom, left) */
+    margin: 1px 0 10px 0;
     letter-spacing: 7px;
+    transition: color 0.3s ease;
 }
 
 h2 {
-    color: #eeeeee;
+    color: var(--text-main); 
     font-size: 40px;
     font-family: 'Segoe UI';
     margin: 30px 0 15px 0;
     
-    /* การตั้งค่าเส้นขีด */
-    border-left: 4px solid #eba030;
-    padding-left: 5px;   /* ใส่ไว้นิดเดียว 5px เพื่อไม่ให้เส้นทับตัวอักษรจนเกินไป */
+    /* การตั้งค่าเส้นขีด ใช้ตัวแปรสี Accent */
+    border-left: 4px solid var(--accent);
+    padding-left: 5px;   
     
-    /* เทคนิคสำคัญ: บังคับให้ขนาดบล็อกเท่ากับตัวหนังสือ */
     width: fit-content; 
-    display: block;      /* หรือใช้ inline-block ถ้าต้องการให้มีอย่างอื่นมาต่อข้างๆ */
+    display: block; 
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 h3 {
-    color: #eca828;
+    color: var(--accent); /* ใช้ตัวแปรสีส้ม/ทอง */
     font-size: 28px;
     font-family: 'Segoe UI';
     margin: 30px 0 15px 0;
@@ -30,59 +45,58 @@ h3 {
 }
 
 h4 {
-    color: #fcfbfb;
+    color: var(--text-main);
     font-size: 28px;
     font-family: 'Segoe UI';
     margin: 30px 0 15px 0;
     padding-left: 0;
 }
 
-/* --- ข้อความเนื้อหาทั่วไป --- */
 p {
-    color: #eeeeee;
+    color: var(--text-main); /* ปรับให้มองเห็นชัดทั้งสองโหมด */
+    opacity: 0.9; /* เพิ่มความโปร่งใสนิดหน่อยสำหรับเนื้อหา */
     font-size: 18px;
     font-family: 'Segoe UI';
     margin: 1px 0 15px 0;
-    padding-left: 0;     /* รีเซ็ตเป็น 0 ตามความต้องการของคุณ */
+    padding-left: 0;
+    transition: color 0.3s ease;
 }
 
 em {
-    color: #979393;
+    /* ในโหมดสว่างอาจต้องการสีเทาที่เข้มขึ้นเพื่อให้อ่านออก */
+    color: var(--text-secondary); 
     font-size: 18px;
     font-family: 'Segoe UI';
-    
 }
 
-/* คลาสเสริมสำหรับจัดกลาง */
+.label-bold {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--text-main); 
+    margin-right: 5px;
+}
+
+/* --- คลาสที่ไม่ได้เกี่ยวกับสี (คงเดิม) --- */
 .text-center {
     text-align: center !important;
-    border-left: none !important; /* มั่นใจว่าไม่มีขีดส้มติดมา */
+    border-left: none !important;
     padding-left: 0 !important;
-    width: 100% !important;        /* กระจายเต็มพื้นที่เพื่อให้กึ่งกลางทำงาน */
+    width: 100% !important;
 }
 
 .text-left {
     padding-left: 160px; 
 }
 
-.label-bold {
-    font-weight: bold;    /* ทำให้เป็นตัวหนา */
-    font-size: 1.2em;     /* ทำให้ใหญ่กว่าปกติ 20% (หรือใช้ px เช่น 28px) */
-    color: #f5f4f3;     
-    margin-right: 5px;    /* เพิ่มระยะห่างด้านขวานิดหน่อย */
-}
-
-/* จัดระเบียบ Wrapper ให้วางขนานกัน */
 .contact-flex-wrapper {
     display: flex;
-    justify-content: space-around; /* จัดให้มีช่องว่างระหว่างสองฝั่งเท่าๆ กัน */
-    align-items: flex-start;       /* ให้ข้อมูลเริ่มจากด้านบนพร้อมกัน */
+    justify-content: space-around;
+    align-items: flex-start;
     padding: 20px;
-    gap: 40px;                     /* ระยะห่างระหว่างฝั่งซ้ายและขวา */
+    gap: 40px;
 }
 
-/* ปรับแต่งฝั่งข้อมูลและที่อยู่ */
 .contact-info, .contact-address {
-    flex: 1;                       /* ให้ทั้งสองฝั่งกินพื้นที่เท่ากัน */
-    text-align: left;              /* จัดตัวอักษรชิดซ้าย */
+    flex: 1;
+    text-align: left;
 }

@@ -75,4 +75,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+const toggleBtn = document.getElementById('theme-toggle'); 
+const body = document.body;
+
+// ตรวจสอบธีมเดิมที่เคยบันทึกไว้
+if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+}
+
+// ใช้เครื่องหมาย ? เพื่อป้องกันบัค 'possibly null' ใน TypeScript
+toggleBtn?.addEventListener('click', () => {
+    // คำสั่งสลับ Class 'light-mode' เพื่อให้ CSS Variables เปลี่ยนค่า
+    body.classList.toggle('light-mode');
+    
+    // บันทึกสถานะไว้ในเครื่องผู้ใช้
+    if (body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+    } else {
+        localStorage.setItem('theme', 'dark');
+    }
+    });
 });
